@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="tianlan">#87CEEB</color>
+    <color name="yinhui">#C0C0C0</color>
+    <color name="shentianlan">#00BFFF</color>
+    <color name="daoqilan">#1E90FF</color>
+    <color name="huise">#808080</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
+    <color name="blue">#0000FF</color>
+    <color name="line">#EEEEE0</color>
+</resources>
