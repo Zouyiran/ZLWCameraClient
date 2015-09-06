@@ -88,7 +88,8 @@
     <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="gson-2.3" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />
+    <orderEntry type="module" module-name="SlidingMenu" exported="" />
     <orderEntry type="module" module-name="vitamio" exported="" />
-    <orderEntry type="module" module-name="PullToRefresh" exported="" />
+    <orderEntry type="module" module-name="PullToRefresh" />
   </component>
 </module>

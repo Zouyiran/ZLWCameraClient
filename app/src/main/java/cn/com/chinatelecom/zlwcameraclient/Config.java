@@ -6,7 +6,7 @@ package cn.com.chinatelecom.zlwcameraclient;
  */
 
 public class Config {
-    static public String server = "113.240.243.180";
+    static public String server = "222.197.180.143";//113.240.243.180
     static public String port = "8087";
     static public int videoQuality = 50;
     static public String loginAPI = "/api?method=login";

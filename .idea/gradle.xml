@@ -9,9 +9,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/PullToRefresh" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/vitamio" />
+            <option value="$PROJECT_DIR$/libs" />
+            <option value="$PROJECT_DIR$/libs/PullToRefresh" />
+            <option value="$PROJECT_DIR$/libs/SlidingMenu" />
+            <option value="$PROJECT_DIR$/libs/vitamio" />
           </set>
         </option>
       </GradleProjectSettings>

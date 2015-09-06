@@ -26,6 +26,12 @@ public class LoginActivity extends Activity {
     private static int LOGIN_SUCCESS = 1;
     private static int LOGIN_FAILED = 2;
     private static int LOGIN_ERROR = 3;
+
+    public static void actionStart(Context context){
+        Intent intent = new Intent(context,MainActivity.class);
+        context.startActivity(intent);
+    }
+
     private View.OnClickListener loginButtonOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -110,11 +116,7 @@ public class LoginActivity extends Activity {
                 passwordInput.setEnabled(true);
                 loginButton.setEnabled(true);
                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent();
-                intent.setClass(LoginActivity.this, MainActivity.class);
-                //String path = "rtmp://222.197.182.130:8085/live/camera-119";
-                //intent.putExtra("path", path);
-                startActivity(intent);
+                MainActivity.actionStart(LoginActivity.this);
             }
             else if (msg.what == LOGIN_FAILED) {
                 loadingView = findViewById(R.id.login_loading);

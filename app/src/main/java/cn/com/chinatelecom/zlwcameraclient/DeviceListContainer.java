@@ -30,7 +30,7 @@ public class DeviceListContainer extends BaseContainer {
     }
 
     private void initView() {
-        replaceFragment(new DeviceList(), false);
+        replaceFragment(new DeviceListFragment(), false);
     }
 
 }

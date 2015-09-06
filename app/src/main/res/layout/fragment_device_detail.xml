@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.com.chinatelecom.zlwcameraclient.DeviceDetail">
+    tools:context="cn.com.chinatelecom.zlwcameraclient.DeviceDetailFragment">
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

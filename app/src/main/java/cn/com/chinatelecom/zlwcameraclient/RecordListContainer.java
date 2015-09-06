@@ -28,7 +28,7 @@ public class RecordListContainer extends BaseContainer {
     }
 
     private void initView() {
-        replaceFragment(new RecordList(), false);
+        replaceFragment(new RecordListFragment(), false);
     }
 
 }

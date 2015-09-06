@@ -67,6 +67,7 @@ public class PlayerActivity extends Activity {
         loadingView = findViewById(R.id.video_loading);
         videoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, ratio);
         videoView.setVideoPath(url);
+//        参看历史视频record
         if (getIntent().getStringExtra("type").equals("record")) {
             mediaController = new MediaController(this);
             videoView.setMediaController(mediaController);

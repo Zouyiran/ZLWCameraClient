@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.ctcc.nongjibao.app.MainActivity">
+      <!--<item android:id="@+id/query"-->
+            <!--android:title="@string/query"-->
+            <!--android:icon="@drawable/query"-->
+            <!--android:actionViewClass="android.widget.SearchView"-->
+            <!--android:orderInCategory="100"-->
+            <!--app:showAsAction="always|collapseActionView"/>-->
+      <item android:id="@+id/record_video"
+          android:title="@string/record_video"
+          android:orderInCategory="100"
+          android:showAsAction="never"/>
+      <item android:id="@+id/app_exit"
+            android:title="@string/app_exit"
+            android:orderInCategory="100"
+            android:showAsAction="never"/>
+</menu>

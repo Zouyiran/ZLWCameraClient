@@ -1,3 +1,5 @@
+apply plugin: 'com.android.application'
+
 buildscript {
     repositories {
         jcenter()
@@ -6,8 +8,6 @@ buildscript {
         classpath 'com.android.tools.build:gradle:1.1.1'
     }
 }
-
-apply plugin: 'com.android.application'
 
 repositories {
     jcenter()
@@ -39,6 +39,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v4:22.2.1'
-    compile project(':vitamio')
-    compile project(':PullToRefresh')
+    compile project(':libs:vitamio')
+    compile project(':libs:PullToRefresh')
+    compile project(':libs:SlidingMenu')
 }

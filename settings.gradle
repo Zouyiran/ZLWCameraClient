@@ -1,1 +1,1 @@
-include ':app', ':vitamio', ':PullToRefresh'
+include ':app', ':libs:vitamio',':libs:SlidingMenu',':libs:PullToRefresh'

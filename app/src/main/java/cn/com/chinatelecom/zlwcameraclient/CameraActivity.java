@@ -29,7 +29,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
+        setContentView(R.layout.activity_camera);//SurfaceView
         server = getIntent().getStringExtra("server");
         port = getIntent().getIntExtra("port", 9999);
         managePort = getIntent().getIntExtra("manage_port", 8086);
