@@ -20,17 +20,12 @@ import android.widget.TextView;
 
 public class DeviceDetailFragment extends Fragment {
     private View rootView;
-    private ActionBar actionBar;
-    private RecordListFragment recordList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_device_detail, null);
-        actionBar = getActivity().getActionBar();
-        actionBar.setTitle(Globals.NOW_DEVICE.get("name"));
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        initDeviceInfo();
         setActionbar();
+        initDeviceInfo();
         return rootView;
     }
 
@@ -45,47 +40,47 @@ public class DeviceDetailFragment extends Fragment {
 
     private void initDeviceInfo() {
         ImageView deviceIcon = (ImageView)rootView.findViewById(R.id.device_icon);
-        if (Globals.NOW_DEVICE.get("type").equals(getResources().getString(R.string.detail_hdcamera))) {
+        if (Globals.NOW_DEVICE.getType().equals(getResources().getString(R.string.detail_hdcamera))) {
             deviceIcon.setImageResource(R.drawable.hd);
-            actionBar.setIcon(R.drawable.hd);
         }
-        else if (Globals.NOW_DEVICE.get("type").equals(getResources().getString(R.string.detail_sdcamera))) {
+        else if (Globals.NOW_DEVICE.getType().equals(getResources().getString(R.string.detail_sdcamera))) {
             deviceIcon.setImageResource(R.drawable.sd);
-            actionBar.setIcon(R.drawable.sd);
         }
-        else if (Globals.NOW_DEVICE.get("type").equals(getResources().getString(R.string.detail_phone))) {
+        else if (Globals.NOW_DEVICE.getType().equals(getResources().getString(R.string.detail_phone))) {
             deviceIcon.setImageResource(R.drawable.phone);
-            actionBar.setIcon(R.drawable.phone);
         }
         else {
             deviceIcon.setImageResource(R.drawable.unknown);
-            actionBar.setIcon(R.drawable.unknown);
         }
 
-        ((TextView)rootView.findViewById(R.id.device_name)).setText(Globals.NOW_DEVICE.get("name"));
-        ((TextView)rootView.findViewById(R.id.device_type)).setText(Globals.NOW_DEVICE.get("type"));
-        ((TextView)rootView.findViewById(R.id.device_addr)).setText(Globals.NOW_DEVICE.get("province") +
-                Globals.NOW_DEVICE.get("city") +
-                Globals.NOW_DEVICE.get("county") +
-                Globals.NOW_DEVICE.get("street"));
-        ((TextView)rootView.findViewById(R.id.device_live_status)).setText(Globals.NOW_DEVICE.get("live"));
-        ((TextView)rootView.findViewById(R.id.device_record_status)).setText(Globals.NOW_DEVICE.get("record"));
+        ((TextView)rootView.findViewById(R.id.device_name)).setText(Globals.NOW_DEVICE.getName());
+        ((TextView)rootView.findViewById(R.id.device_type)).setText(Globals.NOW_DEVICE.getType());
+
+        ((TextView)rootView.findViewById(R.id.device_addr)).setText(Globals.NOW_DEVICE.getProvince() +
+                Globals.NOW_DEVICE.getCity() +
+                Globals.NOW_DEVICE.getCounty() +
+                Globals.NOW_DEVICE.getStreet());
+        ((TextView)rootView.findViewById(R.id.device_live_status)).setText(Globals.NOW_DEVICE.getLive());
+        ((TextView)rootView.findViewById(R.id.device_record_status)).setText(Globals.NOW_DEVICE.getRecord());
 
         ((Button)rootView.findViewById(R.id.view_live_button)).setOnClickListener(playListener);
         ((Button)rootView.findViewById(R.id.view_record_button)).setOnClickListener(recordListener);
 
-        if (!Globals.NOW_DEVICE.get("live").equals(getResources().getString(R.string.detail_camera_live_ready))) {
-            if (!Globals.NOW_DEVICE.get("live").equals(getResources().getString(R.string.detail_phone_live_ready))) {
+        if (!Globals.NOW_DEVICE.getLive().equals(getResources().getString(R.string.detail_camera_live_ready))) {
+            if (!Globals.NOW_DEVICE.getLive().equals(getResources().getString(R.string.detail_phone_live_ready))) {
                 ((Button) rootView.findViewById(R.id.view_live_button)).setEnabled(false);
+                ((Button) rootView.findViewById(R.id.view_live_button)).setBackgroundColor(getResources().getColor(R.color.huise));
+
             }
         }
     }
+
 // 直播
     private View.OnClickListener playListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String rtmp = Globals.NOW_DEVICE.get("url");
-            String ratio = Globals.NOW_DEVICE.get("ratio");
+            String rtmp = Globals.NOW_DEVICE.getUrl();
+            String ratio = Globals.NOW_DEVICE.getRatio();
             Intent intent = new Intent();
             intent.setClass(getActivity(), PlayerActivity.class);
 
@@ -97,15 +92,14 @@ public class DeviceDetailFragment extends Fragment {
             }
         }
     };
+
 // 历史视频
     private View.OnClickListener recordListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //因为是第二层子Fragment
-//            ((BaseContainer)getParentFragment().getParentFragment()).replaceFragment(recordList, true);
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            recordList = new RecordListFragment();
+            RecordListFragment recordList = new RecordListFragment();
             transaction.replace(R.id.framelayout_device, recordList,"recordListFragment");
             transaction.addToBackStack(null);
             transaction.commit();

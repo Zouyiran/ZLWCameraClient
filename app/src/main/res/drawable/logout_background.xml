@@ -6,14 +6,14 @@
             <!--色值-->
             <solid android:color="#990000" />
             <!--圆角-->
-            <corners android:radius="10dp" />
+            <corners android:radius="5dp" />
         </shape>
     </item>
     <!--默认背景-->
     <item>
         <shape>
             <solid android:color="#CC0000" />
-            <corners android:radius="10dp" />
+            <corners android:radius="5dp" />
         </shape>
     </item>
 </selector>

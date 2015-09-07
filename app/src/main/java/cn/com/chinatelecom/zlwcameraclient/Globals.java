@@ -2,7 +2,6 @@ package cn.com.chinatelecom.zlwcameraclient;
 
 import android.content.ContentResolver;
 import android.telephony.TelephonyManager;
-import java.util.Map;
 
 /**
  * Created by Zouyiran on 2014/11/20.
@@ -10,7 +9,8 @@ import java.util.Map;
  */
 public class Globals {
     static public String username;
-    static public Map<String, String> NOW_DEVICE;
+    static public Device NOW_DEVICE;
+    static public Record NOW_RECORD;
     static public int deviceID;
     static TelephonyManager telemanager;
     static ContentResolver resolver;

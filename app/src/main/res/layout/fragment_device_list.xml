@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:scrollbars="vertical">
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:id="@+id/devicelist">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/device_loading"
+    <LinearLayout
+        android:id="@+id/device_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal">
+        <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            android:layout_gravity="center_horizontal">
+            android:id="@+id/device_loadiing_bar"/>
 
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/device_loadiing_bar"/>
-
-            <TextView
-                android:id="@+id/device_loading_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="5.0dip"
-                android:text="@string/devicelist_loading"
-                android:textColor="@color/huise"
-                android:textSize="15.0sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/device_loading_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5.0dip"
+            android:text="@string/devicelist_loading"
+            android:textColor="@color/huise"
+            android:textSize="15.0sp" />
     </LinearLayout>
 
-</ScrollView>
+    <ListView
+            android:id="@+id/device_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+</LinearLayout>

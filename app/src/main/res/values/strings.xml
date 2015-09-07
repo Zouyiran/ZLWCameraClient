@@ -64,9 +64,11 @@
     <string name="detail_device_record_status_default">未知</string>
     <string name="detail_live_button">直播</string>
     <string name="detail_viewrecord_button">查看历史视频</string>
+
     <string name="detail_hdcamera">高清摄像机</string>
     <string name="detail_sdcamera">标清摄像机</string>
     <string name="detail_phone">手机</string>
+
     <string name="detail_camera_live_ready">直播中</string>
     <string name="detail_phone_live_ready">就绪</string>
     <!-- 录制视频界面 -->
@@ -87,7 +89,7 @@
     <string name="recordlist_starttime">起始时间:</string>
     <string name="recordlist_endtime">结束时间:</string>
     <string name="recordlist_duration">持续时间:</string>
-    <string name="recordlist_play_button">播放</string>
+    <string name="recordlist_play">播放</string>
     <!-- 设置界面 -->
     <string name="settings_title">设置</string>
     <string name="settings_loading">查询中</string>
