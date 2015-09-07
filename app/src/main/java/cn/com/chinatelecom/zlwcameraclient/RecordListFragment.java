@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import cn.com.chinatelecom.zlwcameraclient.tools.Config;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import java.util.*;
@@ -58,9 +59,20 @@ public class RecordListFragment extends Fragment{
         mPullRefreshScrollView.getLoadingLayoutProxy(false, true).setRefreshingLabel(getResources().getString(R.string.recordlist_startloading));
         mPullRefreshScrollView.getLoadingLayoutProxy(false, true).setReleaseLabel(getResources().getString(R.string.recordlist_releasetoload));
         mPullRefreshScrollView.setOnRefreshListener(refreshListener);
+        setActionbar();
 
         return rootView;
     }
+
+    private void setActionbar(){
+        ActionBar actionBar = getActivity().getActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);//显示返回图标
+            actionBar.setDisplayShowHomeEnabled(false);//显示app图标
+            actionBar.setTitle(getActivity().getResources().getString(R.string.record_list));
+        }
+    }
+
     private PullToRefreshBase.OnRefreshListener refreshListener = new PullToRefreshBase.OnRefreshListener() {
         @Override
         public void onRefresh(PullToRefreshBase refreshView) {

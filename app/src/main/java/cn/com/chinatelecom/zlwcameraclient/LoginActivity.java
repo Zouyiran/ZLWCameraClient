@@ -9,6 +9,7 @@ import android.view.*;
 import android.widget.*;
 import android.os.*;
 import android.content.SharedPreferences;
+import cn.com.chinatelecom.zlwcameraclient.tools.Config;
 
 /**
  * Created by Zouyiran on 2014/11/23.
@@ -28,7 +29,7 @@ public class LoginActivity extends Activity {
     private static int LOGIN_ERROR = 3;
 
     public static void actionStart(Context context){
-        Intent intent = new Intent(context,MainActivity.class);
+        Intent intent = new Intent(context,LoginActivity.class);
         context.startActivity(intent);
     }
 

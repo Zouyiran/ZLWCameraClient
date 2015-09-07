@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import cn.com.chinatelecom.zlwcameraclient.tools.Config;
+
 import java.util.*;
 
 /**
@@ -43,6 +45,7 @@ public class DeviceListFragment extends Fragment{
         deviceList = (LinearLayout) rootView.findViewById(R.id.devicelist);
         loading = (LinearLayout) rootView.findViewById(R.id.device_loading);
         requestDevices();
+        setActionbar();
 //        ActionBar actionBar = getActivity().getActionBar();
 //        actionBar.setTitle(getResources().getString(R.string.devicelist_title));
 //        actionBar.setIcon(R.drawable.play);
@@ -50,12 +53,11 @@ public class DeviceListFragment extends Fragment{
         return rootView;
     }
 
-    private void actionbar(){
+    private void setActionbar(){
         ActionBar actionBar = getActivity().getActionBar();
         if(actionBar != null){
-//            actionBar.setHomeButtonEnabled(true);
-//            actionBar.setDisplayHomeAsUpEnabled(true);//显示返回图标
-//            actionBar.setDisplayShowHomeEnabled(true);//显示app图标
+            actionBar.setDisplayHomeAsUpEnabled(false);//显示返回图标
+            actionBar.setDisplayShowHomeEnabled(false);//显示app图标
             actionBar.setTitle(getActivity().getResources().getString(R.string.device_list));
         }
     }

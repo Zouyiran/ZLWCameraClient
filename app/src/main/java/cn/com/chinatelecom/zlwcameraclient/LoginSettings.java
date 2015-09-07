@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import cn.com.chinatelecom.zlwcameraclient.tools.Config;
 
 /**
  * Created by Zouyiran on 2014/11/26.

@@ -8,8 +8,8 @@
             <!--android:actionViewClass="android.widget.SearchView"-->
             <!--android:orderInCategory="100"-->
             <!--app:showAsAction="always|collapseActionView"/>-->
-      <item android:id="@+id/record_video"
-          android:title="@string/record_video"
+      <item android:id="@+id/shoot_video"
+          android:title="@string/shoot_video"
           android:orderInCategory="100"
           android:showAsAction="never"/>
       <item android:id="@+id/app_exit"

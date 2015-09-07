@@ -31,6 +31,13 @@
             android:theme="@android:style/Theme.Holo.Light">
         </activity>
         <activity
+                android:name=".ShootActivity"
+                android:label="@string/title_activity_shoot"
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Holo.Light">
+        </activity>
+
+        <activity
             android:name=".LoginSettings"
             android:icon="@drawable/setting_small"
             android:label="@string/title_activity_login_settings" >

@@ -1,17 +1,19 @@
 package cn.com.chinatelecom.zlwcameraclient;
 
 import android.app.ActionBar;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import cn.com.chinatelecom.zlwcameraclient.tools.Config;
+
 import java.util.Map;
 
 /**
@@ -20,7 +22,7 @@ import java.util.Map;
  */
 
 
-public class Record extends Fragment {
+public class ShootFragment extends Fragment {
     private View view;
     private int NOT_REGISTER = 0;
     private int REGISTERED = 1;
@@ -39,10 +41,10 @@ public class Record extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_record, container, false);
-        ActionBar actionBar = getActivity().getActionBar();
-        actionBar.setTitle(getResources().getString(R.string.record_title));
-        actionBar.setIcon(R.drawable.camera);
+        view = inflater.inflate(R.layout.fragment_shoot, container, false);
+//        ActionBar actionBar = getActivity().getActionBar();
+//        actionBar.setTitle(getResources().getString(R.string.record_title));
+//        actionBar.setIcon(R.drawable.camera);
         progressBar = (ProgressBar) view.findViewById(R.id.camera_loading);
         loadingText = (TextView) view.findViewById(R.id.camera_loading_text);
         statusText = (TextView) view.findViewById(R.id.camera_status_text);
@@ -55,9 +57,19 @@ public class Record extends Fragment {
 
         recordButton.setOnClickListener(recordListener);
         checkIfRegister();
-        actionBar.setDisplayHomeAsUpEnabled(false);
+        setActionbar();
         return view;
     }
+
+    private void setActionbar(){
+        ActionBar actionBar = getActivity().getActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);//显示返回图标
+            actionBar.setDisplayShowHomeEnabled(false);//显示app图标
+            actionBar.setTitle(getActivity().getResources().getString(R.string.shoot_video));
+        }
+    }
+
     private View.OnClickListener recordListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {

@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+import cn.com.chinatelecom.zlwcameraclient.tools.Config;
+
 import java.io.ByteArrayOutputStream;
 
 /**

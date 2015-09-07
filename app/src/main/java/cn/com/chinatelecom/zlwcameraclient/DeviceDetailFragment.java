@@ -30,7 +30,17 @@ public class DeviceDetailFragment extends Fragment {
         actionBar.setTitle(Globals.NOW_DEVICE.get("name"));
         actionBar.setDisplayHomeAsUpEnabled(true);
         initDeviceInfo();
+        setActionbar();
         return rootView;
+    }
+
+    private void setActionbar(){
+        ActionBar actionBar = getActivity().getActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);//显示返回图标
+            actionBar.setDisplayShowHomeEnabled(false);//显示app图标
+            actionBar.setTitle(getActivity().getResources().getString(R.string.device_detail));
+        }
     }
 
     private void initDeviceInfo() {
@@ -96,7 +106,7 @@ public class DeviceDetailFragment extends Fragment {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             recordList = new RecordListFragment();
-            transaction.replace(R.id.framelayout_device, recordList,"RecordListFragment");
+            transaction.replace(R.id.framelayout_device, recordList,"recordListFragment");
             transaction.addToBackStack(null);
             transaction.commit();
         }

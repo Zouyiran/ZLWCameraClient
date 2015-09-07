@@ -1,4 +1,4 @@
-package cn.com.chinatelecom.zlwcameraclient;
+package cn.com.chinatelecom.zlwcameraclient.tools;
 
 /**
  * Created by Zouyiran on 2014/11/24.
