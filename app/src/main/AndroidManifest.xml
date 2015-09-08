@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-feature android:name="android.hardware.camera"
+                  android:required="false"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_logo"
@@ -48,6 +51,8 @@
             android:icon="@drawable/setting_small"
             android:label="@string/title_activity_login_settings" >
         </activity>
+
+        <!-- configure this activity to use landscape orientation 横向-->
         <activity
             android:name=".CameraActivity"
             android:label="@string/record_title"

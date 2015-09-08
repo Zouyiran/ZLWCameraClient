@@ -14,6 +14,7 @@ import android.widget.*;
 import cn.com.chinatelecom.zlwcameraclient.data_struct.Device;
 import cn.com.chinatelecom.zlwcameraclient.tools.*;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,23 +27,39 @@ import java.util.Set;
 
 public class DeviceListFragment extends Fragment{
 
-    private int START_GETTING_DEVICELIST = 0;
-    private int GETTING_DEVICELIST_SUCCESS = 1;
-    private int GETTING_DEVICELIST_FAIL = 2;
+    private static int START_GETTING_DEVICELIST = 0;
+    private static int GETTING_DEVICELIST_SUCCESS = 1;
+    private static int GETTING_DEVICELIST_FAIL = 2;
 
-    private View rootView;
-    private LinearLayout loading;
-    private ListView deviceListView;
-    private List<Device> deviceList;
-    private String result = "";
+    private static View rootView;
+    private static LinearLayout loading;
+    private static ListView deviceListView;
+    private static List<Device> deviceList;
+    private static String result = "";
 
     private DeviceDetailFragment deviceDetail;
+    private MainActivity context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        super.onCreateView(inflater,container,savedInstanceState);
+        context = (MainActivity) getActivity();
+        LogUtil.d("DeviceListFragment",context.toString());
         rootView = inflater.inflate(R.layout.fragment_device_list, container, false);
         loading = (LinearLayout) rootView.findViewById(R.id.device_loading);
         deviceListView = (ListView) rootView.findViewById(R.id.device_list_view);
+        deviceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Globals.NOW_DEVICE = deviceList.get(position);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                deviceDetail = new DeviceDetailFragment();
+                transaction.replace(R.id.framelayout_device, deviceDetail,"deviceDetailFragment");
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
         setActionbar();
         requestDevices();
         return rootView;
@@ -62,7 +79,7 @@ public class DeviceListFragment extends Fragment{
             public void run() {
                 Message msg = new Message();
                 msg.what = START_GETTING_DEVICELIST;
-                handler.sendMessage(msg);
+                mHandler.sendMessage(msg);
                 String param = String.format("username=%s", Globals.username);
                 try {
                     String api = "http://" + Config.server + ":" + Config.port + Config.getDeviceAPI;
@@ -70,24 +87,33 @@ public class DeviceListFragment extends Fragment{
                     if (result.equals("")) {
                         Message fail = new Message();
                         fail.what = GETTING_DEVICELIST_FAIL;
-                        handler.sendMessage(fail);
+                        mHandler.sendMessage(fail);
                     }
                     else {
                         Message success = new Message();
                         success.what = GETTING_DEVICELIST_SUCCESS;
-                        handler.sendMessage(success);
+                        mHandler.sendMessage(success);
                     }
 
                 } catch (Exception e){
                     Message fail = new Message();
                     fail.what = GETTING_DEVICELIST_FAIL;
-                    handler.sendMessage(fail);
+                    mHandler.sendMessage(fail);
                 }
             }
         };
         new Thread(requestThread).start();
     }
-    private Handler handler = new Handler() {
+
+    private MHandler mHandler = new MHandler(context);
+    private static class MHandler extends Handler{
+
+        private WeakReference<MainActivity> mActivity;
+
+        public MHandler(MainActivity mainActivity){
+            mActivity = new WeakReference<MainActivity>(mainActivity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == START_GETTING_DEVICELIST) {
@@ -98,37 +124,25 @@ public class DeviceListFragment extends Fragment{
                 try {
                     List<Map<String,String>> devices = Functions.readJson(result);
                     getDeviceInfo(devices);
-                    DeviceAdapter adapter = new DeviceAdapter(getActivity(),R.layout.device_item,deviceList);
+                    DeviceAdapter adapter = new DeviceAdapter(mActivity.get(),R.layout.device_item,deviceList);
                     deviceListView.setAdapter(adapter);
-                    deviceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Globals.NOW_DEVICE = deviceList.get(position);
-                            FragmentManager fragmentManager = getFragmentManager();
-                            FragmentTransaction transaction = fragmentManager.beginTransaction();
-                            deviceDetail = new DeviceDetailFragment();
-                            transaction.replace(R.id.framelayout_device, deviceDetail,"deviceDetailFragment");
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        }
-                    });
                 } catch (Exception e ) {
                     ProgressBar loadingImage = (ProgressBar) rootView.findViewById(R.id.device_loadiing_bar);
                     loadingImage.setVisibility(View.GONE);
                     TextView loadingText = (TextView) rootView.findViewById(R.id.device_loading_text);
-                    loadingText.setText(getResources().getString(R.string.devicelist_error));
+                    loadingText.setText(mActivity.get().getResources().getString(R.string.devicelist_error));
                 }
             }
             else {
                 ProgressBar loadingImage = (ProgressBar) rootView.findViewById(R.id.device_loadiing_bar);
                 loadingImage.setVisibility(View.GONE);
                 TextView loadingText = (TextView) rootView.findViewById(R.id.device_loading_text);
-                loadingText.setText(getResources().getString(R.string.devicelist_fail));
+                loadingText.setText(mActivity.get().getResources().getString(R.string.devicelist_fail));
             }
         }
-    };
+    }
 
-    private void getDeviceInfo(List<Map<String, String>> devices){
+    private static void getDeviceInfo(List<Map<String, String>> devices){
         deviceList = new ArrayList<Device>();
         for (int i = 0; i < devices.size(); i++) {
             Map<String, String> deviceMap = devices.get(i);

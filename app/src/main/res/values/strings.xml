@@ -77,8 +77,8 @@
     <string name="record_title">录制视频</string>
     <string name="record_loading">获取设备状态中</string>
     <string name="record_error">未知错误</string>
-    <string name="record_not_register">设备未在平台注册，请在设置页面注册</string>
-    <string name="record_disabled">设备视频上传功能未启用，请联系管理员</string>
+    <string name="record_not_register">该设备未在管理平台注册，点击页面上方设置图标，进行设备注册</string>
+    <string name="record_disabled">该设备的视频上传功能未启用，请联系管理员</string>
     <string name="record_start_button">开始录制</string>
     <!-- 历史视频界面 -->
     <string name="recordlist_title">历史视频列表</string>
@@ -105,7 +105,7 @@
     <string name="settings_server_default">222.197.180.143</string>
     <string name="settings_port">服务器端口</string>
     <string name="settings_port_default">8087</string>
-    <string name="settings_videoquality">录制质量（0-100）</string>
+    <string name="settings_videoquality">录制质量（0~100）</string>
     <string name="settings_videoquality_default">50</string>
     <string name="settings_register_status">手机注册状态</string>
     <string name="settings_register_status_default">未注册，点击此处自动注册</string>

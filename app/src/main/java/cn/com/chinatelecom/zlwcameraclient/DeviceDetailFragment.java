@@ -1,15 +1,14 @@
 package cn.com.chinatelecom.zlwcameraclient;
 
 import android.app.ActionBar;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.chinatelecom.zlwcameraclient.tools.Globals;
@@ -82,15 +81,7 @@ public class DeviceDetailFragment extends Fragment {
         public void onClick(View v) {
             String rtmp = Globals.NOW_DEVICE.getUrl();
             String ratio = Globals.NOW_DEVICE.getRatio();
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), PlayerActivity.class);
-
-            if (intent != null) {
-                intent.putExtra("path", rtmp);
-                intent.putExtra("ratio", ratio);
-                intent.putExtra("type", "live");
-                startActivity(intent);
-            }
+            PlayerActivity.actionStart(getActivity(),rtmp,ratio,"live");
         }
     };
 

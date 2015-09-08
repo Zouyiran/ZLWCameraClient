@@ -3,15 +3,18 @@ package cn.com.chinatelecom.zlwcameraclient;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.telephony.TelephonyManager;
-import android.view.*;
-import android.widget.*;
-import android.os.*;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.telephony.TelephonyManager;
+import android.view.View;
+import android.widget.*;
 import cn.com.chinatelecom.zlwcameraclient.tools.Config;
 import cn.com.chinatelecom.zlwcameraclient.tools.Globals;
 import cn.com.chinatelecom.zlwcameraclient.tools.HttpRequest;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Created by Zouyiran on 2014/11/23.
@@ -19,10 +22,10 @@ import cn.com.chinatelecom.zlwcameraclient.tools.HttpRequest;
  */
 
 public class LoginActivity extends Activity {
-    private Button loginButton;
-    private View loadingView;
-    private EditText usernameInput;
-    private EditText passwordInput;
+    private static Button loginButton;
+    private static View loadingView;
+    private static EditText usernameInput;
+    private static EditText passwordInput;
     private CheckBox rememberUsername;
     private CheckBox rememberPassword;
     private static int START_LOGIN = 0;
@@ -33,6 +36,71 @@ public class LoginActivity extends Activity {
     public static void actionStart(Context context){
         Intent intent = new Intent(context,LoginActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        Applications.getInstance().addActivity(this);
+        SharedPreferences settings = getSharedPreferences("SETTINGS", 0);
+        //        set default value
+        Config.server = settings.getString("server", Config.server);
+        Config.port = settings.getString("port", Config.port);
+        Config.videoQuality = settings.getInt("videoQuality", Config.videoQuality);
+
+        rememberUsername = (CheckBox)findViewById(R.id.remeber_username);
+        rememberPassword = (CheckBox)findViewById(R.id.remeber_password);
+        usernameInput = (EditText) findViewById(R.id.username);
+        passwordInput = (EditText) findViewById(R.id.password);
+        loginButton = (Button)findViewById(R.id.login);
+        loadingView = findViewById(R.id.login_loading);
+
+        TextView loginSettings = (TextView)findViewById(R.id.login_setting_button);
+
+        rememberPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+                if(isChecked) {
+                    rememberUsername.setChecked(true);
+                }
+            }
+        });
+        rememberUsername.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
+                if(!isChecked) {
+                    rememberPassword.setChecked(false);
+                }
+            }
+        });
+        String ifRememberUsername = settings.getString("remember_username", "no");
+        String ifRememberPassword = settings.getString("remember_password", "no");
+
+        if (ifRememberUsername.equals("yes")) {
+            rememberUsername.setChecked(true);
+            usernameInput.setText(settings.getString("username", ""));
+        }
+        if (ifRememberPassword.equals("yes")) {
+            rememberUsername.setChecked(true);
+            rememberPassword.setChecked(true);
+            usernameInput.setText(settings.getString("username", ""));
+            passwordInput.setText(settings.getString("password", ""));
+        }
+
+        loginButton.setOnClickListener(loginButtonOnClickListener);
+        loginSettings.setOnClickListener(settingButtonListener);
+
+        try{
+            Globals.telemanager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        } catch (Exception ignored) {
+
+        }
+        try{
+            Globals.resolver = getContentResolver();
+        } catch (Exception ignored) {
+
+        }
     }
 
     private View.OnClickListener loginButtonOnClickListener = new View.OnClickListener() {
@@ -56,23 +124,22 @@ public class LoginActivity extends Activity {
                 settings.edit().putString("password", "").apply();
             }
 
-            final String username = usernameInput.getText().toString();
-            final String password = passwordInput.getText().toString();
-            if (username == null || username.length() == 0) {
+            final String username = usernameInput.getText().toString().trim();
+            final String password = passwordInput.getText().toString().trim();
+            if (username.length() == 0) {
                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_username_hint), Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (password == null || password.length() == 0) {
+            if (password.length() == 0) {
                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_password_hint), Toast.LENGTH_SHORT).show();
                 return;
             }
-
             Runnable requestThread = new Runnable(){
                 @Override
                 public void run() {
                     Message msg = new Message();
                     msg.what = START_LOGIN;
-                    handler.sendMessage(msg);
+                    mHandler.sendMessage(msg);
                     String param = String.format("username=%s&password=%s", username, password);
                     String api = "http://" + Config.server + ":" + Config.port + Config.loginAPI;
                     String result = HttpRequest.sendPost(api, param);
@@ -81,128 +148,71 @@ public class LoginActivity extends Activity {
                         Globals.username = username;
                         Message success = new Message();
                         success.what = LOGIN_SUCCESS;
-                        handler.sendMessage(success);
+                        mHandler.sendMessage(success);
                     }
                     else if (result.equals("0")) {
                         Message fail = new Message();
                         fail.what = LOGIN_FAILED;
-                        handler.sendMessage(fail);
+                        mHandler.sendMessage(fail);
                     }
                     else {
                         Message fail = new Message();
                         fail.what = LOGIN_ERROR;
-                        handler.sendMessage(fail);
+                        mHandler.sendMessage(fail);
                     }
                 }
             };
             new Thread(requestThread).start();
-
         }
     };
 
-    private Handler handler = new Handler() {
+//    In Android, Handler classes should be static or leaks might occur,
+//    Messages enqueued on the application thread’s MessageQueue also retain their target Handler.
+//    If the Handler is an inner class, its outer class will be retained as well.
+//    To avoid leaking the outer class, declare the Handler as a static nested class with a WeakReference to its outer class
+
+    private MHandler mHandler = new MHandler(LoginActivity.this);
+
+    private static class MHandler extends Handler {
+
+        private WeakReference<LoginActivity> mActivity;
+
+        public MHandler(LoginActivity activity){
+            mActivity = new WeakReference<LoginActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == START_LOGIN) {
-                loadingView = findViewById(R.id.login_loading);
                 loadingView.setVisibility(View.VISIBLE);
-
                 usernameInput.setEnabled(false);
                 passwordInput.setEnabled(false);
                 loginButton.setEnabled(false);
             }
             else if (msg.what == LOGIN_SUCCESS) {
-                loadingView = findViewById(R.id.login_loading);
                 loadingView.setVisibility(View.GONE);
                 usernameInput.setEnabled(true);
                 passwordInput.setEnabled(true);
                 loginButton.setEnabled(true);
-                Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
-                MainActivity.actionStart(LoginActivity.this);
-                LoginActivity.this.finish();
+                Toast.makeText(mActivity.get(), mActivity.get().getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
+                MainActivity.actionStart(mActivity.get());
+                mActivity.get().finish();
             }
             else if (msg.what == LOGIN_FAILED) {
-                loadingView = findViewById(R.id.login_loading);
                 loadingView.setVisibility(View.GONE);
-                Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_wrongpassword), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.get(), mActivity.get().getResources().getString(R.string.login_wrongpassword), Toast.LENGTH_SHORT).show();
                 usernameInput.setEnabled(true);
                 passwordInput.setEnabled(true);
                 loginButton.setEnabled(true);
             }
             else if (msg.what == LOGIN_ERROR) {
-                loadingView = findViewById(R.id.login_loading);
                 loadingView.setVisibility(View.GONE);
-                Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_servererror), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mActivity.get(), mActivity.get().getResources().getString(R.string.login_servererror), Toast.LENGTH_SHORT).show();
                 usernameInput.setEnabled(true);
                 passwordInput.setEnabled(true);
                 loginButton.setEnabled(true);
             }
         }
-    };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        try{
-            Globals.telemanager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        } catch (Exception ignored) {
-
-        }
-
-        try{
-            Globals.resolver = getContentResolver();
-        } catch (Exception ignored) {
-
-        }
-
-        Applications.getInstance().addActivity(this);
-        setContentView(R.layout.activity_login);
-        SharedPreferences settings = getSharedPreferences("SETTINGS", 0);
-        Config.server = settings.getString("server", getResources().getString(R.string.settings_server_default));
-        Config.port = settings.getString("port", getResources().getString(R.string.settings_port_default));
-        Config.videoQuality = settings.getInt("videoQuality", Integer.valueOf(getResources().getString(R.string.settings_videoquality_default)));
-
-        rememberUsername = (CheckBox)findViewById(R.id.remeber_username);
-        rememberPassword = (CheckBox)findViewById(R.id.remeber_password);
-        usernameInput = (EditText) findViewById(R.id.username);
-        passwordInput = (EditText) findViewById(R.id.password);
-
-        rememberPassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
-                if(isChecked) {
-                    rememberUsername.setChecked(true);
-                }
-            }
-        });
-
-        rememberUsername.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked){
-                if(!isChecked) {
-                    rememberPassword.setChecked(false);
-                }
-            }
-        });
-        String ifRememberUsername = settings.getString("remember_username", "no");// 选中状态
-        String ifRememberPassword = settings.getString("remember_password", "no");// 选中状态
-
-        if (ifRememberUsername.equals("yes")) {
-            rememberUsername.setChecked(true);
-            usernameInput.setText(settings.getString("username", ""));
-        }
-        if (ifRememberPassword.equals("yes")) {
-            rememberUsername.setChecked(true);
-            rememberPassword.setChecked(true);
-            usernameInput.setText(settings.getString("username", ""));
-            passwordInput.setText(settings.getString("password", ""));
-        }
-
-        loginButton = (Button)findViewById(R.id.login);
-        loginButton.setOnClickListener(loginButtonOnClickListener);
-
-        TextView loginSettings = (TextView)findViewById(R.id.login_setting_button);
-        loginSettings.setOnClickListener(settingButtonListener);
     }
 
     private View.OnClickListener settingButtonListener = new View.OnClickListener() {

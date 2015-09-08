@@ -2,7 +2,6 @@ package cn.com.chinatelecom.zlwcameraclient;
 
 import android.app.ActionBar;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +17,7 @@ import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,18 +29,18 @@ import java.util.Set;
  */
 
 public class RecordListFragment extends Fragment{
-    private int START_GETTING_RECORDS = 0;
-    private int GETTING_RECORDS_SUCCESS = 1;
-    private int GETTING_RECORDS_FAIL = 2;
-    private int page = 1;
-    private int num = 10;
+    private static int START_GETTING_RECORDS = 0;
+    private static int GETTING_RECORDS_SUCCESS = 1;
+    private static int GETTING_RECORDS_FAIL = 2;
+    private static int page = 1;
+    private static int num = 10;
 
-    private View rootView;
-    private LinearLayout loading;
-    private PullToRefreshListView recordListView;
-    private List<Record> recordList =  new ArrayList<Record>();
-    private RecordAdapter adapter;
-    private String result = "";
+    private static View rootView;
+    private static LinearLayout loading;
+    private static PullToRefreshListView recordListView;
+    private static List<Record> recordList =  new ArrayList<Record>();
+    private static RecordAdapter adapter;
+    private static String result = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class RecordListFragment extends Fragment{
             public void run() {
                 Message msg = new Message();
                 msg.what = START_GETTING_RECORDS;
-                handler.sendMessage(msg);
+                mHandler.sendMessage(msg);
                 String param = String.format("deviceid=%s&start=%d&num=%d", Globals.NOW_DEVICE.getId(), record_start, record_num);
                 try {
                     String api = "http://" + Config.server + ":" + Config.port + Config.getRecordAPI;
@@ -91,24 +91,31 @@ public class RecordListFragment extends Fragment{
                     if (result.equals("")) {
                         Message fail = new Message();
                         fail.what = GETTING_RECORDS_FAIL;
-                        handler.sendMessage(fail);
+                        mHandler.sendMessage(fail);
                     }
                     else {
                         Message success = new Message();
                         success.what = GETTING_RECORDS_SUCCESS;
-                        handler.sendMessage(success);
+                        mHandler.sendMessage(success);
                     }
                 } catch (Exception e){
                     Message fail = new Message();
                     fail.what = GETTING_RECORDS_FAIL;
-                    handler.sendMessage(fail);
+                    mHandler.sendMessage(fail);
                 }
             }
         };
         new Thread(requestThread).start();
     }
 
-    private Handler handler = new Handler() {
+    private MHandler mHandler = new MHandler((MainActivity) getActivity());
+    private static class MHandler extends Handler{
+
+        private WeakReference<MainActivity> mActivity;
+
+        public MHandler(MainActivity activity){
+            mActivity = new WeakReference<MainActivity>(activity);
+        }
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == START_GETTING_RECORDS) {
@@ -119,24 +126,25 @@ public class RecordListFragment extends Fragment{
                 try {
                     List<Map<String,String>> records = Functions.readJson(result);
                     getRecordInfo(records);
-                    adapter = new RecordAdapter(getActivity(),R.layout.record_item,recordList);
+                    adapter = new RecordAdapter(mActivity.get(),R.layout.record_item,recordList);
                     recordListView.setAdapter(adapter);
                 } catch (Exception e ) {
                     ProgressBar loadingImage = (ProgressBar) rootView.findViewById(R.id.record_loading_bar);
                     loadingImage.setVisibility(View.GONE);
                     TextView loadingText = (TextView) rootView.findViewById(R.id.record_loading_text);
-                    loadingText.setText(getResources().getString(R.string.recordlist_error));                }
+                    loadingText.setText(mActivity.get().getResources().getString(R.string.recordlist_error));
+                }
             }
             else {
                 ProgressBar loadingImage = (ProgressBar) rootView.findViewById(R.id.record_loading_bar);
                 loadingImage.setVisibility(View.GONE);
                 TextView loadingText = (TextView) rootView.findViewById(R.id.record_loading_text);
-                loadingText.setText(getResources().getString(R.string.recordlist_fail));
+                loadingText.setText(mActivity.get().getResources().getString(R.string.recordlist_fail));
             }
         }
     };
 
-    private void getRecordInfo(List<Map<String,String>> records){
+    private static void getRecordInfo(List<Map<String,String>> records){
         for(int i=0;i<records.size();i++){
             Map<String, String> recordMap = records.get(i);
             Set<Map.Entry<String,String>> entrySet = recordMap.entrySet();
@@ -160,12 +168,7 @@ public class RecordListFragment extends Fragment{
             Globals.NOW_RECORD = recordList.get(position);
             String url = Globals.NOW_RECORD.getUrl();
             String ratio = Globals.NOW_DEVICE.getRatio();
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), PlayerActivity.class);
-            intent.putExtra("path", url);
-            intent.putExtra("ratio", ratio);
-            intent.putExtra("type", "record");
-            startActivity(intent);
+            PlayerActivity.actionStart(getActivity(),url,ratio,"record");
         }
     };
 
