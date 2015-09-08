@@ -7,7 +7,7 @@
     <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_gravity="center"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp">
@@ -24,8 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="8"
-        android:layout_gravity="center"
-        android:layout_margin="5dp">
+        android:layout_gravity="center">
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
@@ -86,16 +85,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp">
-        <TextView android:layout_width="wrap_content"
+        <ImageView
+                android:id="@+id/goto_play_image"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/recordlist_play"
-                android:textColor="@color/huise"
-                android:textSize="16sp"
-                android:background="@drawable/button_background"/>
+                android:src="@drawable/goto_play"/>
+        <!--<TextView android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:text="@string/recordlist_play"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="16sp"-->
+                <!--android:background="@drawable/button_background"/>-->
     </LinearLayout>
 
 </LinearLayout>

@@ -4,135 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:scrollbars="vertical">
-    <!--
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="7"
-                android:orientation="vertical"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="服务器地址"
-                    android:textSize="18sp"/>
-                </LinearLayout>
-
-            <EditText
-                android:id="@+id/server_addr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="113.240.243.180"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="7"
-                android:orientation="vertical"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="服务器端口"
-                    android:textSize="18dp"/>
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/server_port"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
-                android:text="8087"
-                android:gravity="center"
-                android:inputType="number"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="40dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="7"
-                android:orientation="vertical"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="手机注册状态"
-                    android:textSize="18dp"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/phone_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:text="未注册，点击自动注册"
-                android:textColor="@color/huise"
-                android:textSize="14dp"/>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/save_settings_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/button_background"
-            android:text="保存设置"
-            android:textColor="@color/white" />
-        <Button
-            android:id="@+id/logout_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/logout_background"
-            android:text="退出登录"
-            android:textColor="@color/white" />
-    </LinearLayout>
-    -->
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -152,13 +23,14 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="@drawable/detail_item_deafult"
+                android:background="@drawable/detail_item_default"
                 android:orientation="vertical" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
@@ -197,7 +69,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
@@ -237,7 +110,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
@@ -277,7 +151,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:paddingBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
@@ -314,21 +189,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:background="@drawable/button_background"
             android:text="@string/settings_save_button"
             android:textColor="@color/white" />
-        <Button
-            android:id="@+id/logout_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/logout_background"
-            android:text="@string/settings_logout_button"
-            android:textColor="@color/white" />
-
     </LinearLayout>
 </ScrollView>

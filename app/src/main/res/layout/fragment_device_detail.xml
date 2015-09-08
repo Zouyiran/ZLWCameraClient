@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2.0dip"
                 android:layout_marginRight="2.0dip"
-                android:background="@drawable/detail_item_deafult"
+                android:background="@drawable/detail_item_default"
                 android:paddingBottom="16.0dip"
                 android:paddingTop="8.0dip" >
 
@@ -102,7 +102,7 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:background="@drawable/detail_item_deafult"
+                    android:background="@drawable/detail_item_default"
                     android:orientation="vertical" >
 
                     <RelativeLayout
@@ -201,8 +201,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
                 android:background="@drawable/button_background"
                 android:text="@string/detail_live_button"
                 android:textColor="@color/white" />
@@ -211,8 +209,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
                 android:background="@drawable/button_background"
                 android:text="@string/detail_viewrecord_button"
                 android:textColor="@color/white" />

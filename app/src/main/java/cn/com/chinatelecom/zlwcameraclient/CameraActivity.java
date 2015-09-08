@@ -36,6 +36,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback{
         port = getIntent().getIntExtra("port", 9999);
         managePort = getIntent().getIntExtra("manage_port", 8086);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        Applications.getInstance().addActivity(this);
         initView();
     }
 

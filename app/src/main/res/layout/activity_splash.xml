@@ -18,6 +18,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:paddingTop="5dp"
+            android:textColor="@color/huise"
             android:textSize="16sp"/>
 
 </LinearLayout>

@@ -12,13 +12,13 @@ import android.os.Bundle;
  *
  */
 
-public class ShootActivity extends Activity{
+public class SettingActivity extends Activity{
 
-    private ShootFragment shootFragment;
+    private SettingFragment settingFragment;
 
 
     public static void actionStart(Context context){
-        Intent intent = new Intent(context,ShootActivity.class);
+        Intent intent = new Intent(context,SettingActivity.class);
         context.startActivity(intent);
     }
 
@@ -33,11 +33,11 @@ public class ShootActivity extends Activity{
     private void setFragment(){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if(shootFragment == null){
-            shootFragment = new ShootFragment();
-            transaction.add(R.id.framelayout_shoot,shootFragment,"shootFragment");
+        if(settingFragment == null){
+            settingFragment = new SettingFragment();
+            transaction.add(R.id.framelayout_shoot,settingFragment,"settingFragment");
         }else{
-            transaction.show(shootFragment);
+            transaction.show(settingFragment);
         }
         transaction.commit();
     }

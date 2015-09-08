@@ -4,7 +4,7 @@
     <item android:state_pressed="true">
         <shape>
             <!--色值-->
-            <solid android:color="#e79429" />
+            <solid android:color="#87CEEB" />
             <!--圆角-->
             <corners android:radius="5dp" />
         </shape>
@@ -12,7 +12,7 @@
     <!--默认背景-->
     <item>
         <shape>
-            <solid android:color="#f6aa3e" />
+            <solid android:color="#4682B4" />
             <corners android:radius="5dp" />
         </shape>
     </item>

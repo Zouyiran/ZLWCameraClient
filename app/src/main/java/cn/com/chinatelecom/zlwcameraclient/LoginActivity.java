@@ -68,7 +68,6 @@ public class LoginActivity extends Activity {
             Runnable requestThread = new Runnable(){
                 @Override
                 public void run() {
-                    // TODO Auto-generated method stub
                     Message msg = new Message();
                     msg.what = START_LOGIN;
                     handler.sendMessage(msg);
@@ -118,6 +117,7 @@ public class LoginActivity extends Activity {
                 loginButton.setEnabled(true);
                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
                 MainActivity.actionStart(LoginActivity.this);
+                LoginActivity.this.finish();
             }
             else if (msg.what == LOGIN_FAILED) {
                 loadingView = findViewById(R.id.login_loading);
@@ -207,7 +207,7 @@ public class LoginActivity extends Activity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
-            intent.setClass(LoginActivity.this, LoginSettings.class);
+            intent.setClass(LoginActivity.this, LoginSettingActivity.class);
             startActivity(intent);
         }
     };

@@ -30,26 +30,27 @@ public class SettingFragment extends Fragment {
     private int deviceID;
     private TextView statusView;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_settings, container, false);
-        ActionBar actionBar = getActivity().getActionBar();
-        actionBar.setTitle(getResources().getString(R.string.settings_title));
-        actionBar.setIcon(R.drawable.settings);
-        actionBar.setDisplayHomeAsUpEnabled(false);
 
         getPhoneStatus();
 
         Button saveButton = (Button) rootView.findViewById(R.id.save_settings_button);
         saveButton.setOnClickListener(saveSettingsListener);
-
-        Button logoutButton = (Button) rootView.findViewById(R.id.logout_button);
-        logoutButton.setOnClickListener(logoutListner);
-
         ((EditText) rootView.findViewById(R.id.server_addr)).setText(Config.server);
         ((EditText) rootView.findViewById(R.id.server_port)).setText(Config.port);
         ((EditText) rootView.findViewById(R.id.quality)).setText(String.valueOf(Config.videoQuality));
+        setActionbar();
         return rootView;
+    }
+
+    private void setActionbar(){
+        ActionBar actionBar = getActivity().getActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);//显示返回图标
+            actionBar.setDisplayShowHomeEnabled(false);//显示app图标
+            actionBar.setTitle(getActivity().getResources().getString(R.string.setting));
+        }
     }
     private void getPhoneStatus() {
         ((TextView) rootView.findViewById(R.id.device_status)).setText(getResources().getString(R.string.settings_loading));
@@ -177,13 +178,6 @@ public class SettingFragment extends Fragment {
             settings.edit().putString("port", serverPort).apply();
             settings.edit().putInt("videoQuality", video_quality).apply();
             Toast.makeText(getActivity(), getString(R.string.settings_save_success), Toast.LENGTH_SHORT).show();
-        }
-    };
-
-    private View.OnClickListener logoutListner = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            getActivity().finish();
         }
     };
 

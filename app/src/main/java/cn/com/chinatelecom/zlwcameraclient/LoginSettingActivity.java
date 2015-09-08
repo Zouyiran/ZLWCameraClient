@@ -14,7 +14,7 @@ import cn.com.chinatelecom.zlwcameraclient.tools.Config;
  *
  */
 
-public class LoginSettings extends Activity {
+public class LoginSettingActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +33,17 @@ public class LoginSettings extends Activity {
             String serverPort = ((EditText) findViewById(R.id.login_server_port)).getText().toString();
 
             if (serverAddr == null || serverAddr.length() == 0) {
-                Toast.makeText(LoginSettings.this, getResources().getString(R.string.settings_enter_server), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginSettingActivity.this, getResources().getString(R.string.settings_enter_server), Toast.LENGTH_SHORT).show();
                 return;
             }
             if (serverPort == null || serverPort.length() == 0) {
-                Toast.makeText(LoginSettings.this, getResources().getString(R.string.settings_enter_port), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginSettingActivity.this, getResources().getString(R.string.settings_enter_port), Toast.LENGTH_SHORT).show();
                 return;
             }
 
             int port = Integer.valueOf(serverPort);
             if (port > 65535 || port <= 0) {
-                Toast.makeText(LoginSettings.this, getResources().getString(R.string.setting_port_error), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginSettingActivity.this, getResources().getString(R.string.setting_port_error), Toast.LENGTH_SHORT).show();
                 return;
             }
             Config.server = serverAddr;
@@ -51,7 +51,7 @@ public class LoginSettings extends Activity {
             SharedPreferences settings = getSharedPreferences("SETTINGS", 0);
             settings.edit().putString("server", serverAddr).apply();
             settings.edit().putString("port", serverPort).apply();
-            Toast.makeText(LoginSettings.this, getResources().getString(R.string.settings_save_success), Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginSettingActivity.this, getResources().getString(R.string.settings_save_success), Toast.LENGTH_SHORT).show();
             finish();
         }
     };

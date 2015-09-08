@@ -27,7 +27,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private SettingFragment setting;
     private ShootFragment shoot;
     private static Boolean isQuit = false;
-
     Timer timer = new Timer();
 
     public static void actionStart(Context context){
@@ -41,6 +40,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         setOverflowShowAlways();
         setFragment();
+        Applications.getInstance().addActivity(this);
     }
 
     private void setSlidingMenu(){
@@ -117,6 +117,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.shoot_video:
                 ShootActivity.actionStart(MainActivity.this);
                 break;
+            case R.id.setting:
+                SettingActivity.actionStart(MainActivity.this);
+                break;
+            case R.id.logout:
+                LoginActivity.actionStart(MainActivity.this);
+                MainActivity.this.finish();
+                break;
             case R.id.app_exit:
                 Applications.getInstance().exit();
                 break;
@@ -126,31 +133,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 //    @Override
 //    public void onBackPressed() {
-//        boolean isPopFragment = false;
-//        String currentTabTag = mTabHost.getCurrentTabTag();
-//        if (currentTabTag.equals(mTextviewArray[0])) {
-//            isPopFragment = ((BaseContainer)getSupportFragmentManager().findFragmentByTag(mTextviewArray[0])).popFragment();
-//        } else if (currentTabTag.equals(mTextviewArray[1])) {
-//            isPopFragment = ((BaseContainer)getSupportFragmentManager().findFragmentByTag(mTextviewArray[1])).popFragment();
-//        } else if (currentTabTag.equals(mTextviewArray[2])) {
-//            isPopFragment = ((BaseContainer) getSupportFragmentManager().findFragmentByTag(mTextviewArray[2])).popFragment();
-//        }
-//        if (!isPopFragment) {
-//            if (isQuit == false) {
-//                isQuit = true;
-//                Toast.makeText(getBaseContext(), getString(R.string.exit_msg), Toast.LENGTH_SHORT).show();
-//                TimerTask task;
-//                task = new TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        isQuit = false;
-//                    }
-//                };
-////                schedule(TimerTask task, long delay)
-//                timer.schedule(task, 2000);
-//            } else {
-//                Applications.getInstance().exit();
-//            }
+//        if (!isQuit) {
+//            isQuit = true;
+//            Toast.makeText(getBaseContext(), getString(R.string.exit_msg), Toast.LENGTH_SHORT).show();
+//            TimerTask task;
+//            task = new TimerTask() {
+//                @Override
+//                public void run() {
+//                    isQuit = false;
+//                }
+//            };
+//            timer.schedule(task, 2000);
+//        } else {
+//            Applications.getInstance().exit();
 //        }
 //    }
 }
