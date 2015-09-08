@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import cn.com.chinatelecom.zlwcameraclient.tools.Config;
+import cn.com.chinatelecom.zlwcameraclient.tools.Functions;
+import cn.com.chinatelecom.zlwcameraclient.tools.Globals;
+import cn.com.chinatelecom.zlwcameraclient.tools.HttpRequest;
 
 import java.util.Map;
 

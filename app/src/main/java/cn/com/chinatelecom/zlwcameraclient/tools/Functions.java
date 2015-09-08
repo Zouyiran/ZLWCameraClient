@@ -1,4 +1,4 @@
-package cn.com.chinatelecom.zlwcameraclient;
+package cn.com.chinatelecom.zlwcameraclient.tools;
 
 import com.google.gson.stream.JsonReader;
 

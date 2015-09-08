@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cn.com.chinatelecom.zlwcameraclient.tools.Globals;
 
 /**
  * Created by Zouyiran on 2014/11/22.

@@ -10,6 +10,8 @@ import android.widget.*;
 import android.os.*;
 import android.content.SharedPreferences;
 import cn.com.chinatelecom.zlwcameraclient.tools.Config;
+import cn.com.chinatelecom.zlwcameraclient.tools.Globals;
+import cn.com.chinatelecom.zlwcameraclient.tools.HttpRequest;
 
 /**
  * Created by Zouyiran on 2014/11/23.

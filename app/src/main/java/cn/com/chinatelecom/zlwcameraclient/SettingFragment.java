@@ -14,6 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.chinatelecom.zlwcameraclient.tools.Config;
+import cn.com.chinatelecom.zlwcameraclient.tools.Functions;
+import cn.com.chinatelecom.zlwcameraclient.tools.Globals;
+import cn.com.chinatelecom.zlwcameraclient.tools.HttpRequest;
 
 /**
  * Created by Zouyiran on 2014/11/26.

@@ -12,7 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import cn.com.chinatelecom.zlwcameraclient.tools.Config;
+import cn.com.chinatelecom.zlwcameraclient.data_struct.Record;
+import cn.com.chinatelecom.zlwcameraclient.tools.*;
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -20,6 +21,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Zouyiran on 2014/11/20.
@@ -137,6 +139,10 @@ public class RecordListFragment extends Fragment{
     private void getRecordInfo(List<Map<String,String>> records){
         for(int i=0;i<records.size();i++){
             Map<String, String> recordMap = records.get(i);
+            Set<Map.Entry<String,String>> entrySet = recordMap.entrySet();
+            for(Map.Entry<String,String> each : entrySet){
+                LogUtil.d("RecordListFragment", each.getKey() + "->" + each.getValue());
+            }
             Record record = new Record();
             record.setId(recordMap.get("id"));
             record.setUrl(recordMap.get("url"));

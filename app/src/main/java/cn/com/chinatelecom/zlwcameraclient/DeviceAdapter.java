@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cn.com.chinatelecom.zlwcameraclient.data_struct.Device;
 
 import java.util.List;
 

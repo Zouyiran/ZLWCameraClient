@@ -1,14 +1,31 @@
-package cn.com.chinatelecom.zlwcameraclient;
+package cn.com.chinatelecom.zlwcameraclient.data_struct;
 
 /**
  * Created by Zouyiran on 2015/9/7.
  */
 public class Device {
 
+//    url->rtmp://222.197.180.143:8085/live/camera-240
+//    street->电子科大清水河校区
+//    server_addr->222.197.180.143
+//    server_port->8086
+//    type->标清摄像机
+//    city->成都
+//    id->240
+//    record->停止
+//    county->郫县
+//    ratio->4:3
+//    priority->1
+//    name->科B109
+//    province->四川
+//    keep->7
+//    live->直播中
+//    rtsp->rtsp://222.197.180.143:50000/video0.sdp
+
     private String id;
     private String name;
     private String type;
-    private String url;
+    private String url;//设备rtmp
     private String rtsp;
 
     //视频保存期限,直播,录制,换面比例,优先级
