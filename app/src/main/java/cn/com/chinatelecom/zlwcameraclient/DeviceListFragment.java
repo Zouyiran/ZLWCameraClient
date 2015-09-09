@@ -1,9 +1,6 @@
 package cn.com.chinatelecom.zlwcameraclient;
 
-import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.app.*;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,15 +33,19 @@ public class DeviceListFragment extends Fragment{
     private static ListView deviceListView;
     private static List<Device> deviceList;
     private static String result = "";
-
+    private static WeakReference<MainActivity> mActivity;
     private DeviceDetailFragment deviceDetail;
     private MainActivity context;
 
     @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        context = (MainActivity) getActivity();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
-        context = (MainActivity) getActivity();
-        LogUtil.d("DeviceListFragment",context.toString());
         rootView = inflater.inflate(R.layout.fragment_device_list, container, false);
         loading = (LinearLayout) rootView.findViewById(R.id.device_loading);
         deviceListView = (ListView) rootView.findViewById(R.id.device_list_view);
@@ -62,6 +63,7 @@ public class DeviceListFragment extends Fragment{
         });
         setActionbar();
         requestDevices();
+        mActivity = new WeakReference<MainActivity>(context);
         return rootView;
     }
 
@@ -70,7 +72,8 @@ public class DeviceListFragment extends Fragment{
         if(actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(false);//显示返回图标
             actionBar.setDisplayShowHomeEnabled(false);//显示app图标
-            actionBar.setTitle(getActivity().getResources().getString(R.string.device_list));
+            actionBar.setTitle(getString(R.string.device_list));
+            LogUtil.d("DeviceListFragment","-->setTitle");
         }
     }
     private void requestDevices() {
@@ -104,15 +107,14 @@ public class DeviceListFragment extends Fragment{
         };
         new Thread(requestThread).start();
     }
-
-    private MHandler mHandler = new MHandler(context);
+//TODO
+    private MHandler mHandler = new MHandler();
     private static class MHandler extends Handler{
-
-        private WeakReference<MainActivity> mActivity;
-
-        public MHandler(MainActivity mainActivity){
-            mActivity = new WeakReference<MainActivity>(mainActivity);
-        }
+//        private static WeakReference<MainActivity> mActivity;
+//
+//        public MHandler(MainActivity activity){
+//            mActivity = new WeakReference<MainActivity>(activity);
+//        }
 
         @Override
         public void handleMessage(Message msg) {
@@ -130,14 +132,14 @@ public class DeviceListFragment extends Fragment{
                     ProgressBar loadingImage = (ProgressBar) rootView.findViewById(R.id.device_loadiing_bar);
                     loadingImage.setVisibility(View.GONE);
                     TextView loadingText = (TextView) rootView.findViewById(R.id.device_loading_text);
-                    loadingText.setText(mActivity.get().getResources().getString(R.string.devicelist_error));
+                    loadingText.setText(mActivity.get().getString(R.string.devicelist_error));
                 }
             }
             else {
                 ProgressBar loadingImage = (ProgressBar) rootView.findViewById(R.id.device_loadiing_bar);
                 loadingImage.setVisibility(View.GONE);
                 TextView loadingText = (TextView) rootView.findViewById(R.id.device_loading_text);
-                loadingText.setText(mActivity.get().getResources().getString(R.string.devicelist_fail));
+                loadingText.setText(mActivity.get().getString(R.string.devicelist_fail));
             }
         }
     }

@@ -1,6 +1,7 @@
 package cn.com.chinatelecom.zlwcameraclient;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,6 +42,14 @@ public class RecordListFragment extends Fragment{
     private static List<Record> recordList =  new ArrayList<Record>();
     private static RecordAdapter adapter;
     private static String result = "";
+    private static WeakReference<MainActivity> mActivity;
+    private MainActivity context;
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        context = (MainActivity) getActivity();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -51,6 +60,7 @@ public class RecordListFragment extends Fragment{
         setActionbar();
         setPullToRefreshMode();
         initRecords(0, num);
+        mActivity = new WeakReference<MainActivity>(context);
         return rootView;
     }
 
@@ -107,15 +117,15 @@ public class RecordListFragment extends Fragment{
         };
         new Thread(requestThread).start();
     }
-
-    private MHandler mHandler = new MHandler((MainActivity) getActivity());
+//TODO
+    private MHandler mHandler = new MHandler();
     private static class MHandler extends Handler{
 
-        private WeakReference<MainActivity> mActivity;
-
-        public MHandler(MainActivity activity){
-            mActivity = new WeakReference<MainActivity>(activity);
-        }
+//        private static WeakReference<MainActivity> mActivity;
+//
+//        public MHandler(MainActivity activity){
+//            mActivity = new WeakReference<MainActivity>(activity);
+//        }
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == START_GETTING_RECORDS) {

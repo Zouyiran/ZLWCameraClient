@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.TextView;
+import cn.com.chinatelecom.zlwcameraclient.tools.LogUtil;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import java.lang.reflect.Field;
@@ -34,13 +35,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
         context.startActivity(intent);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LogUtil.d("MainActivity","-->onCreate");
         setContentView(R.layout.activity_main);
         setOverflowShowAlways();
         setFragment();
         Applications.getInstance().addActivity(this);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        LogUtil.d("MainActivity","-->onStart");
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        LogUtil.d("MainActivity","-->onResume");
     }
 
     private void setSlidingMenu(){

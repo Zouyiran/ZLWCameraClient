@@ -178,7 +178,6 @@ public class ShootFragment extends Fragment {
         new Thread(requestThread).start();
     }
 
-
     private static MHandler mHandler = new MHandler();
     private static class MHandler extends Handler{
         @Override
@@ -190,9 +189,11 @@ public class ShootFragment extends Fragment {
                 statusText.setVisibility(View.VISIBLE);
                 shootButton.setVisibility(View.GONE);
                 statusText.setText(mActivity.get().getResources().getString(R.string.record_not_register));
+                LogUtil.d("ShootFragment-->NOT_REGISTER",mActivity.get().toString());
             }
 //           如果设备已经注册，检查设备是否开启拍摄功能
             else if (msg.what == REGISTERED){
+                LogUtil.d("ShootFragment-->REGISTERED",mActivity.get().toString());
                 checkIfEnabled();
             }
 //            设备未开启拍摄功能
