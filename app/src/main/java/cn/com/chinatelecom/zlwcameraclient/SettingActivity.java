@@ -52,6 +52,7 @@ public class SettingActivity extends Activity{
                 Intent upIntent = NavUtils.getParentActivityIntent(this);
                 upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 NavUtils.navigateUpTo(this,upIntent);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

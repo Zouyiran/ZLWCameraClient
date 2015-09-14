@@ -1,6 +1,7 @@
 package cn.com.chinatelecom.zlwcameraclient;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -51,7 +52,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onStart(){
         super.onStart();
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        int heapSize = manager.getMemoryClass();
         LogUtil.d("MainActivity","-->onStart");
+        LogUtil.d("MainActivity",String.valueOf(heapSize));
 
     }
 
@@ -60,6 +64,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onResume();
         LogUtil.d("MainActivity","-->onResume");
     }
+
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig){
+//        super.onConfigurationChanged(newConfig);
+//        LogUtil.d("MainActivity","onConfigurationChanged");
+//    }
 
     private void setSlidingMenu(){
         SlidingMenu slidingMenu = new SlidingMenu(this);

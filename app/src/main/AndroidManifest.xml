@@ -52,6 +52,7 @@
             android:name=".LoginSettingActivity"
             android:icon="@drawable/setting_small"
             android:label="@string/title_activity_login_settings"
+            android:screenOrientation="portrait"
             android:parentActivityName=".LoginActivity">
         </activity>
 
@@ -64,9 +65,9 @@
         </activity>
         <activity
                 android:name=".PlayerActivity"
-                android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
                 android:label="@string/title_activity_player"
                 android:screenOrientation="landscape"
+                android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
                 android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
         </activity>
     </application>

@@ -74,6 +74,18 @@ public class LoginActivity extends Activity {
                 }
             }
         });
+
+        if(savedInstanceState != null){
+            String username = savedInstanceState.getString("username");
+            String password = savedInstanceState.getString("password");
+            if(username != null){
+                usernameInput.setText(username);
+            }
+            if(password != null){
+                passwordInput.setText(password);
+            }
+        }
+
         String ifRememberUsername = settings.getString("remember_username", "no");
         String ifRememberPassword = settings.getString("remember_password", "no");
 
@@ -106,24 +118,6 @@ public class LoginActivity extends Activity {
     private View.OnClickListener loginButtonOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            SharedPreferences settings = getSharedPreferences("SETTINGS", 0);
-            if (rememberUsername.isChecked()) {
-                settings.edit().putString("remember_username", "yes").apply();
-                settings.edit().putString("username", usernameInput.getText().toString()).apply();
-            }
-            else {
-                settings.edit().putString("remember_username", "no").apply();
-                settings.edit().putString("username", "").apply();
-            }
-            if (rememberPassword.isChecked()) {
-                settings.edit().putString("remember_password", "yes").apply();
-                settings.edit().putString("password", passwordInput.getText().toString()).apply();
-            }
-            else {
-                settings.edit().putString("remember_password", "no").apply();
-                settings.edit().putString("password", "").apply();
-            }
-
             final String username = usernameInput.getText().toString().trim();
             final String password = passwordInput.getText().toString().trim();
             if (username.length() == 0) {
@@ -133,6 +127,23 @@ public class LoginActivity extends Activity {
             if (password.length() == 0) {
                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_password_hint), Toast.LENGTH_SHORT).show();
                 return;
+            }
+            SharedPreferences settings = getSharedPreferences("SETTINGS", 0);
+            if (rememberUsername.isChecked()) {
+                settings.edit().putString("remember_username", "yes").apply();
+                settings.edit().putString("username", username).apply();
+            }
+            else {
+                settings.edit().putString("remember_username", "no").apply();
+                settings.edit().putString("username", "").apply();
+            }
+            if (rememberPassword.isChecked()) {
+                settings.edit().putString("remember_password", "yes").apply();
+                settings.edit().putString("password", password).apply();
+            }
+            else {
+                settings.edit().putString("remember_password", "no").apply();
+                settings.edit().putString("password", "").apply();
             }
             Runnable requestThread = new Runnable(){
                 @Override
@@ -223,4 +234,13 @@ public class LoginActivity extends Activity {
             startActivity(intent);
         }
     };
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        String username = usernameInput.getText().toString().trim();
+        String password = passwordInput.getText().toString().trim();
+        outState.putString("username",username);
+        outState.putString("password",password);
+    }
 }
