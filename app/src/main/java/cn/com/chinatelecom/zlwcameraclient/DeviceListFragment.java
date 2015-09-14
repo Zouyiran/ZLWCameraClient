@@ -49,23 +49,31 @@ public class DeviceListFragment extends Fragment{
         rootView = inflater.inflate(R.layout.fragment_device_list, container, false);
         loading = (LinearLayout) rootView.findViewById(R.id.device_loading);
         deviceListView = (ListView) rootView.findViewById(R.id.device_list_view);
-        deviceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Globals.NOW_DEVICE = deviceList.get(position);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                deviceDetail = new DeviceDetailFragment();
-                transaction.replace(R.id.framelayout_device, deviceDetail,"deviceDetailFragment");
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-        });
+        deviceListView.setOnItemClickListener(onItemClickListener);
         setActionbar();
         requestDevices();
         mActivity = new WeakReference<MainActivity>(context);
         return rootView;
     }
+
+    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Globals.NOW_DEVICE = deviceList.get(position);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+//            TODO
+            DeviceDetailFragment deviceDetail = new DeviceDetailFragment();
+            transaction.replace(R.id.framelayout_device, deviceDetail, "deviceDetailFragment");
+//            transaction.remove(DeviceListFragment.this);
+//                事务add进回退栈，这样按back键就可以逆向返回(如果是A->B，则back键之后就是B->A)
+//            压栈是指将前一个fragment压进栈中
+//            transaction.addToBackStack(null);
+            transaction.commit();
+            fragmentManager.executePendingTransactions();
+
+        }
+    };
 
     private void setActionbar(){
         ActionBar actionBar = getActivity().getActionBar();

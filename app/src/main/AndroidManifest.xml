@@ -36,12 +36,14 @@
         <activity
                 android:name=".ShootActivity"
                 android:label="@string/title_activity_shoot"
+                android:parentActivityName=".MainActivity"
                 android:screenOrientation="portrait"
                 android:theme="@android:style/Theme.Holo.Light">
         </activity>
         <activity
                 android:name=".SettingActivity"
                 android:label="@string/title_activity_setting"
+                android:parentActivityName=".MainActivity"
                 android:screenOrientation="portrait"
                 android:theme="@android:style/Theme.Holo.Light">
         </activity>
@@ -49,7 +51,8 @@
         <activity
             android:name=".LoginSettingActivity"
             android:icon="@drawable/setting_small"
-            android:label="@string/title_activity_login_settings" >
+            android:label="@string/title_activity_login_settings"
+            android:parentActivityName=".LoginActivity">
         </activity>
 
         <!-- configure this activity to use landscape orientation 横向-->

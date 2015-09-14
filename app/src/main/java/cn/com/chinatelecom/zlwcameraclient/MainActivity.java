@@ -11,11 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.com.chinatelecom.zlwcameraclient.tools.LogUtil;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import java.lang.reflect.Field;
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Zouyiran on 2014/11/26.
@@ -125,11 +127,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch(id){
-//            case android.R.id.home:
-//                Intent upIntent = NavUtils.getParentActivityIntent(this);
-//                upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                NavUtils.navigateUpTo(this,upIntent);
-//                return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             case R.id.shoot_video:
                 ShootActivity.actionStart(MainActivity.this);
                 break;
@@ -147,21 +147,49 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return super.onOptionsItemSelected(item);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (!isQuit) {
-//            isQuit = true;
-//            Toast.makeText(getBaseContext(), getString(R.string.exit_msg), Toast.LENGTH_SHORT).show();
-//            TimerTask task;
-//            task = new TimerTask() {
-//                @Override
-//                public void run() {
-//                    isQuit = false;
-//                }
-//            };
-//            timer.schedule(task, 2000);
-//        } else {
-//            Applications.getInstance().exit();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        DeviceListFragment deviceListFragment = (DeviceListFragment)fragmentManager.findFragmentByTag("deviceListFragment");
+        DeviceDetailFragment deviceDetailFragment = (DeviceDetailFragment) fragmentManager.findFragmentByTag("deviceDetailFragment");
+        RecordListFragment  recordListFragment = (RecordListFragment) fragmentManager.findFragmentByTag("recordListFragment");
+//       按照目前的写法，每次只会有一个fragment不为null
+//       因为没有将transaction加入到backstack中,每次remove掉的旧fragment就会被destroy
+//        如果加入进backstack中,则旧的fragment处于stop状态
+        if(deviceListFragment != null && deviceListFragment.isAdded()){
+            appExit();
+        }else if(deviceDetailFragment != null && deviceDetailFragment.isAdded()){
+//            fragmentManager.popBackStack();
+            DeviceListFragment deviceListFragment1 = new DeviceListFragment();
+//            transaction.remove(deviceDetailFragment);
+            transaction.replace(R.id.framelayout_device, deviceListFragment1,"deviceListFragment");
+            transaction.commit();
+            fragmentManager.executePendingTransactions();
+        }else if(recordListFragment != null && recordListFragment.isAdded()){
+//            fragmentManager.popBackStack();
+            DeviceDetailFragment deviceDetailFragment1 = new DeviceDetailFragment();
+//            transaction.remove(recordListFragment);
+            transaction.replace(R.id.framelayout_device,deviceDetailFragment1,"deviceDetailFragment");
+            transaction.commit();
+            fragmentManager.executePendingTransactions();
+        }
+    }
+
+    private void appExit(){
+        if (!isQuit) {
+            isQuit = true;
+            Toast.makeText(getBaseContext(), getString(R.string.exit_msg), Toast.LENGTH_SHORT).show();
+            TimerTask task;
+            task = new TimerTask() {
+                @Override
+                public void run() {
+                    isQuit = false;
+                }
+            };
+            timer.schedule(task, 2000);
+        } else {
+            Applications.getInstance().exit();
+        }
+    }
 }

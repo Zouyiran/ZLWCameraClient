@@ -92,9 +92,12 @@ public class DeviceDetailFragment extends Fragment {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             RecordListFragment recordList = new RecordListFragment();
-            transaction.replace(R.id.framelayout_device, recordList,"recordListFragment");
-            transaction.addToBackStack(null);
+//            TODO
+            transaction.replace(R.id.framelayout_device, recordList, "recordListFragment");
+//            transaction.remove(DeviceDetailFragment.this);
+//            transaction.addToBackStack(null);
             transaction.commit();
+            fragmentManager.executePendingTransactions();
         }
     };
 }
