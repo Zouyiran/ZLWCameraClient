@@ -22,7 +22,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Zouyiran on 2014/11/20.
@@ -39,7 +38,7 @@ public class RecordListFragment extends Fragment{
     private static View rootView;
     private static LinearLayout loading;
     private static PullToRefreshListView recordListView;
-    private static List<Record> recordList =  new ArrayList<Record>();
+    private static List<Record> recordList;
     private static RecordAdapter adapter;
     private static String result = "";
     private static WeakReference<MainActivity> mActivity;
@@ -61,6 +60,7 @@ public class RecordListFragment extends Fragment{
         setPullToRefreshMode();
         initRecords(0, num);
         mActivity = new WeakReference<MainActivity>(context);
+        recordList =  new ArrayList<Record>();
         return rootView;
     }
 
@@ -94,6 +94,8 @@ public class RecordListFragment extends Fragment{
                 Message msg = new Message();
                 msg.what = START_GETTING_RECORDS;
                 mHandler.sendMessage(msg);
+//                LogUtil.d("RecordListFragment_NOW_DEVICE_name",Globals.NOW_DEVICE.getName());
+//                LogUtil.d("RecordListFragment_NOW_DEVICE_id",Globals.NOW_DEVICE.getId());
                 String param = String.format("deviceid=%s&start=%d&num=%d", Globals.NOW_DEVICE.getId(), record_start, record_num);
                 try {
                     String api = "http://" + Config.server + ":" + Config.port + Config.getRecordAPI;
@@ -157,10 +159,10 @@ public class RecordListFragment extends Fragment{
     private static void getRecordInfo(List<Map<String,String>> records){
         for(int i=0;i<records.size();i++){
             Map<String, String> recordMap = records.get(i);
-            Set<Map.Entry<String,String>> entrySet = recordMap.entrySet();
-            for(Map.Entry<String,String> each : entrySet){
-                LogUtil.d("RecordListFragment", each.getKey() + "->" + each.getValue());
-            }
+//            Set<Map.Entry<String,String>> entrySet = recordMap.entrySet();
+//            for(Map.Entry<String,String> each : entrySet){
+//                LogUtil.d("RecordListFragment", Globals.NOW_DEVICE.getName()+":"+each.getKey() + "->" + each.getValue());
+//            }
             Record record = new Record();
             record.setId(recordMap.get("id"));
             record.setUrl(recordMap.get("url"));

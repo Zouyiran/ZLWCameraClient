@@ -15,7 +15,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Zouyiran on 2014/11/20.
@@ -60,6 +59,7 @@ public class DeviceListFragment extends Fragment{
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Globals.NOW_DEVICE = deviceList.get(position);
+            LogUtil.d("DeviceListFragment",Globals.NOW_DEVICE.getName());
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
 //            TODO
@@ -156,10 +156,10 @@ public class DeviceListFragment extends Fragment{
         deviceList = new ArrayList<Device>();
         for (int i = 0; i < devices.size(); i++) {
             Map<String, String> deviceMap = devices.get(i);
-            Set<Map.Entry<String,String>> entrySet = deviceMap.entrySet();
-            for(Map.Entry<String,String> each : entrySet){
-                LogUtil.d("DeviceListFragment",each.getKey()+"->"+each.getValue());
-            }
+//            Set<Map.Entry<String,String>> entrySet = deviceMap.entrySet();
+//            for(Map.Entry<String,String> each : entrySet){
+//                LogUtil.d("DeviceListFragment",each.getKey()+"->"+each.getValue());
+//            }
             Device device = new Device();
             device.setName(deviceMap.get("name"));
             device.setType(deviceMap.get("type"));

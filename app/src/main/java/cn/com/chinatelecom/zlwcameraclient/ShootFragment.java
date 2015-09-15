@@ -226,6 +226,10 @@ public class ShootFragment extends Fragment {
                 LogUtil.d("ShootFragment","port->"+port);
                 LogUtil.d("ShootFragment","managePort->"+deviceServer.get("server_port"));
                 CameraActivity.actionStart(mActivity.get(),deviceServer.get("server_addr"),port,deviceServer.get("server_port"));
+
+//                intent.putExtra("server", device.get("server_addr"));
+//                intent.putExtra("port", port);
+//                intent.putExtra("manage_port", device.get("server_port"));
             }
             else {
                 progressBar.setVisibility(View.GONE);

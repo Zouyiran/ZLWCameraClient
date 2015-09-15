@@ -26,6 +26,7 @@ import java.io.ByteArrayOutputStream;
 public class CameraActivity extends Activity implements SurfaceHolder.Callback{
 
     private SurfaceHolder surfaceHolder;
+    @SuppressWarnings("deprecation")
     private Camera camera;
     private String server;
     private int port;
@@ -57,7 +58,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback{
         server = getIntent().getStringExtra("server");
         port = getIntent().getIntExtra("port", 9999);
         managePort = getIntent().getIntExtra("manage_port", 8086);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         Applications.getInstance().addActivity(this);
         initSurfaceView();
     }
@@ -115,6 +116,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback{
         //设置预览回调
         camera.setPreviewCallback(previewCallback);
         try {
+            @SuppressWarnings("deprecation")
             Camera.Parameters parameters = camera.getParameters();
             parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
             camera.setParameters(parameters);
@@ -156,6 +158,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback{
 
 //    * @param cb a callback object that receives a copy of each preview frame,
 //    *     or null to stop receiving callbacks.
+    @SuppressWarnings("deprecation")
     private Camera.PreviewCallback previewCallback = new Camera.PreviewCallback() {
 //    接收每一帧的画面
         @Override

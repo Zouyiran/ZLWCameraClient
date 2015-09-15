@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,11 +66,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         LogUtil.d("MainActivity","-->onResume");
     }
 
-//    @Override
-//    public void onConfigurationChanged(Configuration newConfig){
-//        super.onConfigurationChanged(newConfig);
-//        LogUtil.d("MainActivity","onConfigurationChanged");
-//    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
+        LogUtil.d("MainActivity","onConfigurationChanged");
+    }
 
     private void setSlidingMenu(){
         SlidingMenu slidingMenu = new SlidingMenu(this);
@@ -94,6 +95,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
             transaction.show(deviceList);
         }
         transaction.commit();
+        fragmentManager.executePendingTransactions();
+
     }
 
     private void setOverflowShowAlways() {
