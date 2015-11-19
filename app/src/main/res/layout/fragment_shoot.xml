@@ -30,7 +30,7 @@
                 android:gravity="center"
                 android:paddingTop="5.0dip"
                 android:text="@string/record_loading"
-                android:textColor="@color/huise"
+                android:textColor="@color/gray"
                 android:textSize="15.0sp" />
             <TextView
                 android:id="@+id/camera_status_text"
@@ -39,15 +39,15 @@
                 android:gravity="center"
                 android:drawableTop="@drawable/wrong"
                 android:drawablePadding="5dp"
-                android:text="@string/record_error"
-                android:textColor="@color/huise"
+                android:text="@string/shoot_error"
+                android:textColor="@color/gray"
                 android:textSize="15.0sp" />
             <Button
                 android:id="@+id/recordButton"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_background"
-                android:text="@string/record_start_button"
+                android:background="@drawable/device_button_background"
+                android:text="@string/shoot_start"
                 android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>

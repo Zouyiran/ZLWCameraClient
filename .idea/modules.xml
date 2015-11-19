@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/libs/PullToRefresh/PullToRefresh.iml" filepath="$PROJECT_DIR$/libs/PullToRefresh/PullToRefresh.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libs/SlidingMenu/SlidingMenu.iml" filepath="$PROJECT_DIR$/libs/SlidingMenu/SlidingMenu.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ZLWCameraClient.iml" filepath="$PROJECT_DIR$/ZLWCameraClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PullToRefresh/PullToRefresh.iml" filepath="$PROJECT_DIR$/PullToRefresh/PullToRefresh.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZLWCamera.iml" filepath="$PROJECT_DIR$/ZLWCamera.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libs/libs.iml" filepath="$PROJECT_DIR$/libs/libs.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libs/vitamio/vitamio.iml" filepath="$PROJECT_DIR$/libs/vitamio/vitamio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vitamio/vitamio.iml" filepath="$PROJECT_DIR$/vitamio/vitamio.iml" />
     </modules>
   </component>
 </project>

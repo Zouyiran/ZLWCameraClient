@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#4682B4</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#DB7093</color>
+
     <color name="white">#FFFFFF</color>
-    <color name="yinhui">#C0C0C0</color>
-    <color name="blue">#4682B4</color>
-    <color name="huise">#808080</color>
+    <color name="light_gray_1">#E0E0E0</color>
+    <color name="light_gray_2">#C0C0C0</color>
+    <color name="setting_line">#EEEEE0</color>
+
+    <color name="gray">#808080</color>
+    <color name="dark_gray">#696969</color>
+    <color name="slate_gray">#708090</color>
     <color name="black">#000000</color>
     <color name="red">#FF0000</color>
+    <color name="pink">#FF4081</color>
     <color name="line">#EEEEE0</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

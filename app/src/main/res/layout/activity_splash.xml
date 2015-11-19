@@ -3,22 +3,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                tools:context="com.ctcc.nongjibao.app.SplashActivity">
-    <ImageView
-            android:id="@+id/app_image"
-            android:layout_width="wrap_content"
+                tools:context="com.ctcc.zlwcamera.SplashActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:layout_gravity="bottom">
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingTop="100dp"
-            />
-    <TextView
-            android:text="@string/app_name"
-            android:layout_width="wrap_content"
+            android:gravity="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:gravity="center"
-            android:paddingTop="5dp"
-            android:textColor="@color/huise"
-            android:textSize="16sp"/>
-
+            android:text="@string/app_name"
+            android:textSize="30sp"
+            android:textColor="@color/colorPrimary" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:layout_gravity="bottom">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/app_footer"
+            android:textColor="@color/gray" />
+    </LinearLayout>
 </LinearLayout>
+

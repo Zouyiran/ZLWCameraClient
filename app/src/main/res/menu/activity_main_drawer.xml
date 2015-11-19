@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_main"
+            android:icon="@drawable/device"
+            android:title="@string/activity_title_device" />
+        <item
+            android:id="@+id/nav_shoot"
+            android:icon="@drawable/shoot"
+            android:title="@string/activity_title_shoot" />
+
+    </group>
+    <item
+        android:title="@string/title_server_and_mobile">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/setting_2"
+                android:title="@string/title_setting" />
+        </menu>
+    </item>
+
+</menu>

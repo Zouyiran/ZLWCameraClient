@@ -1,74 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.com.chinatelecom.zlwcameraclient" >
+    package="com.ctcc.zlwcamera" >
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <uses-feature android:name="android.hardware.camera"
-                  android:required="false"/>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_logo"
         android:label="@string/app_name"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme" >
 
-        <activity android:name=".SplashActivity"
-                  android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.NoActionBar">
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/activity_title_main"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light">
-        </activity>
-        <activity
-                android:name=".ShootActivity"
-                android:label="@string/activity_title_shoot"
-                android:parentActivityName=".MainActivity"
-                android:screenOrientation="portrait"
-                android:theme="@android:style/Theme.Holo.Light">
-        </activity>
-        <activity
-                android:name=".SettingActivity"
-                android:label="@string/activity_title_setting"
-                android:parentActivityName=".MainActivity"
-                android:screenOrientation="portrait"
-                android:theme="@android:style/Theme.Holo.Light">
+            android:label="@string/activity_title_login"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".LoginSettingActivity"
-            android:icon="@drawable/setting_small"
-            android:label="@string/title_activity_login_settings"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".LoginActivity">
+            android:label="@string/activity_title_login_setting"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
         </activity>
 
-        <!-- configure this activity to use landscape orientation 横向-->
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/activity_title_device"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".RecordActivity"
+            android:label="@string/title_record"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".PlayerActivity"
+            android:label="@string/activity_title_player"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
+        </activity>
+
         <activity
             android:name=".CameraActivity"
-            android:label="@string/record_title"
+            android:label="@string/activity_title_shoot"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
         </activity>
-        <activity
-                android:name=".PlayerActivity"
-                android:label="@string/activity_title_player"
-                android:screenOrientation="landscape"
-                android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
-                android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
-        </activity>
+
     </application>
+
 </manifest>
