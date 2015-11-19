@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">种联网视频监控客户端</string>
-    <string name="title_activity_player">视频播放</string>
-    <string name="title_activity_main">视频监控列表</string>
-    <string name="title_activity_shoot">录制视频</string>
-    <string name="title_activity_setting">录制视频</string>
-    <string name="exit_msg">再按一次返回键退出应用</string>
+
+    <string name="activity_title_main">视频监控列表</string>
+    <string name="activity_title_player">视频播放</string>
+    <string name="activity_title_shoot">录制视频</string>
+    <string name="activity_title_setting">录制视频</string>
+
+    <!-- message -->
+    <string name="app_exit_msg">再按一次返回键退出应用</string>
 
     <string name="tab_monitor">监控列表</string>
     <string name="tab_video">录制视频</string>

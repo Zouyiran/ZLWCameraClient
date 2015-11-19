@@ -36,12 +36,14 @@ public class DeviceListFragment extends Fragment{
     private DeviceDetailFragment deviceDetail;
     private MainActivity context;
 
+//    Called when a fragment is first attached to its activity.
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
         context = (MainActivity) getActivity();
     }
 
+//    Called to have the fragment instantiate its user interface view.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);

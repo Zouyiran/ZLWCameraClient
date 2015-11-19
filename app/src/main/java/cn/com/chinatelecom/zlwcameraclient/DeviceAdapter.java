@@ -31,9 +31,7 @@ public class DeviceAdapter extends ArrayAdapter<Device> {
         }
         Device device = getItem(position);
         View view;
-//        对控件实例进行缓存
         ViewHolder viewHolder;
-//        对之前加载好的布局进行缓存
         if(convertView == null){
             view =  LayoutInflater.from(getContext()).inflate(subLayoutId,null);
             viewHolder = new ViewHolder();

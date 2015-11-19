@@ -192,7 +192,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void appExit(){
         if (!isQuit) {
             isQuit = true;
-            Toast.makeText(getBaseContext(), getString(R.string.exit_msg), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), getString(R.string.app_exit_msg), Toast.LENGTH_SHORT).show();
             TimerTask task;
             task = new TimerTask() {
                 @Override

@@ -29,20 +29,20 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/activity_title_main"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light">
         </activity>
         <activity
                 android:name=".ShootActivity"
-                android:label="@string/title_activity_shoot"
+                android:label="@string/activity_title_shoot"
                 android:parentActivityName=".MainActivity"
                 android:screenOrientation="portrait"
                 android:theme="@android:style/Theme.Holo.Light">
         </activity>
         <activity
                 android:name=".SettingActivity"
-                android:label="@string/title_activity_setting"
+                android:label="@string/activity_title_setting"
                 android:parentActivityName=".MainActivity"
                 android:screenOrientation="portrait"
                 android:theme="@android:style/Theme.Holo.Light">
@@ -65,7 +65,7 @@
         </activity>
         <activity
                 android:name=".PlayerActivity"
-                android:label="@string/title_activity_player"
+                android:label="@string/activity_title_player"
                 android:screenOrientation="landscape"
                 android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
                 android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
