@@ -31,4 +31,13 @@
         android:layout_height="match_parent"
         android:divider="@color/light_gray_1"
         android:dividerHeight="@dimen/device_margin"/>
+    <!--<TextView-->
+        <!--android:id="@+id/empty_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:paddingTop="@dimen/activity_vertical_margin"-->
+        <!--android:text="@string/device_empty"-->
+        <!--android:textColor="@color/gray" />-->
+
 </LinearLayout>

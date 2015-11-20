@@ -58,16 +58,13 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         TextView usernameView = (TextView) headerLayout.findViewById(R.id.username_text);
-        if(usernameView == null){
-            LogUtil.d("MainActivity",Globals.nowUsername);
-        }else{
-            usernameView.setText(Globals.nowUsername);
-        }
+//        if(usernameView == null){
+//            LogUtil.d("MainActivity",Globals.nowUsername);
+//        }else{
+        usernameView.setText(Globals.nowUsername);
+//        }
 
-//        TextView usernameText = (TextView) findViewById(R.id.username_text);
-//        usernameText.setText(Globals.nowUsername);
-
-                setFragment(new DeviceFragment());
+        setFragment(new DeviceFragment());
 
         Applications.getInstance().addActivity(this);
     }

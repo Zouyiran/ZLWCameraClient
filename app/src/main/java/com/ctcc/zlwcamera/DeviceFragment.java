@@ -53,6 +53,7 @@ public class DeviceFragment extends Fragment {
         loadingBar = (ProgressBar) rootView.findViewById(R.id.loading_bar);
         loadingText = (TextView) rootView.findViewById(R.id.loading_text);
         deviceListView = (ListView) rootView.findViewById(R.id.device_list_view);
+//        deviceListView.setEmptyView(rootView.findViewById(R.id.empty_view));
         mActivity = new WeakReference<MainActivity>((MainActivity) getActivity());
 
         attemptGetDevice();

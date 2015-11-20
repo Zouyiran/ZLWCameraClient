@@ -27,5 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/light_gray_1"
-        android:dividerHeight="@dimen/device_margin"/>
+        android:dividerHeight="@dimen/device_margin"
+        />
 </LinearLayout>

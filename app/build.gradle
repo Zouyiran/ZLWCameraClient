@@ -11,10 +11,22 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+//    signingConfigs {
+//        release {
+//            storeFile file("C:\\Users\\Zouyiran\\zlwcamera.jks")
+//            storePassword "zyrzyr"
+//            keyAlias "zlwcamera"
+//            keyPassword "zyrzyr"
+//        }
+//    }
+
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            zipAlignEnabled true
+//            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }

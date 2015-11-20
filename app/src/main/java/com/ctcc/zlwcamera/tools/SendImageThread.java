@@ -25,7 +25,6 @@ public class SendImageThread extends Thread {
 
     public void run() {
         try{
-            //将图像数据通过Socket发送出去
             Socket tempSocket = new Socket(server, port);
             outsocket = tempSocket.getOutputStream();
             ByteArrayInputStream inputstream = new ByteArrayInputStream(outputStream.toByteArray());

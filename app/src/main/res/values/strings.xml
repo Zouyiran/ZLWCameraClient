@@ -19,6 +19,7 @@
     <string name="device_loading">正在获取监控设备信息</string>
     <string name="device_parse_error">解析监控设备信息出错</string>
     <string name="device_loading_fail">获取监控设备信息失败</string>
+    <string name="device_empty">还没有监控设备信息哦</string>
 
     <string name="record_loading">正在获取历史视频信息</string>
     <string name="record_parse_error">解析历史视频信息出错</string>
@@ -74,6 +75,8 @@
     <string name="phone">手机</string>
     <string name="living">直播中</string>
     <string name="ready">就绪</string>
+    <string name="stop">停止</string>
+
 
     <!-- record -->
     <string name="record_start">起始时间：</string>

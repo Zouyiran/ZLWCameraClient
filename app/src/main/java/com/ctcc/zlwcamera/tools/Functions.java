@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class Functions {
     public static List<Map<String, String>> readJson(String jsonStr) throws Exception {
-        List result = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> result = new ArrayList<Map<String, String>>();
         JsonReader reader = new JsonReader(new StringReader(jsonStr));
         reader.beginArray();
         while (reader.hasNext()) {

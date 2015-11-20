@@ -86,6 +86,9 @@ public class DeviceAdapter extends ArrayAdapter<Device> {
         if (!device.getLive().equals(context.getResources().getString(R.string.living)) && !device.getLive().equals(context.getResources().getString(R.string.ready))) {
            viewHolder.mLiveButton.setVisibility(View.INVISIBLE);
         }
+        if(device.getRecord().equals(context.getResources().getString(R.string.stop))){
+            viewHolder.mRecordButton.setVisibility(View.INVISIBLE);
+        }
 
         viewHolder.mDeviceLayout.setDeviceClickListener(new DeviceLayout.DeviceOnClickListener(){
 
