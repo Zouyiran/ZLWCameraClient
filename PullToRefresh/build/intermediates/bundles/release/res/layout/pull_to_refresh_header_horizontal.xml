@@ -26,4 +26,4 @@
             android:visibility="gone" />
     </FrameLayout>
 
-</merge><!-- From: file:/G:/Workspace/JetBrains/ZLWCamera/ZLWCamera/PullToRefresh/res/layout/pull_to_refresh_header_horizontal.xml -->
+</merge><!-- From: file:/G:/Workspace/JetBrains/ZLWCameraClient/pullToRefresh/res/layout/pull_to_refresh_header_horizontal.xml -->

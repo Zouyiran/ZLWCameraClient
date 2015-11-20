@@ -15,4 +15,4 @@
         android:topLeftRadius="@dimen/indicator_corner_radius"
         android:topRightRadius="@dimen/indicator_corner_radius" />
 
-</shape><!-- From: file:/G:/Workspace/JetBrains/ZLWCamera/ZLWCamera/PullToRefresh/res/drawable/indicator_bg_bottom.xml -->
+</shape><!-- From: file:/G:/Workspace/JetBrains/ZLWCameraClient/pullToRefresh/res/drawable/indicator_bg_bottom.xml -->

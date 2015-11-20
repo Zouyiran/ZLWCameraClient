@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/G:/Workspace/JetBrains/ZLWCamera/ZLWCamera/vitamio/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/G:/Workspace/JetBrains/ZLWCameraClient/vitamio/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <color name="mediacontroller_bg">#99000000</color>
     <color name="mediacontroller_bg_pressed">#ff53c1bd</color>

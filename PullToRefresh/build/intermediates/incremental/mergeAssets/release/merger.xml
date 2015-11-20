@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="G:\Workspace\JetBrains\ZLWCamera\ZLWCamera\PullToRefresh\src\main\assets"/></dataSet><dataSet config="release"><source path="G:\Workspace\JetBrains\ZLWCamera\ZLWCamera\PullToRefresh\src\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="G:\Workspace\JetBrains\ZLWCameraClient\pullToRefresh\src\main\assets"/></dataSet><dataSet config="release"><source path="G:\Workspace\JetBrains\ZLWCameraClient\pullToRefresh\src\release\assets"/></dataSet></merger>
