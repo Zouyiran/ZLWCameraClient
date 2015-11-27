@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame_layout_main, fragment, fragmentTag);
-        LogUtil.d("MainActivity", fragment.getClass().toString());// class com.ctcc.zlwcamera.DeviceFragment
+//        LogUtil.d("MainActivity", fragment.getClass().toString());// class com.ctcc.zlwcamera.DeviceFragment
         transaction.commit();
         fragmentManager.executePendingTransactions();
 
